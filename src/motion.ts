@@ -1,4 +1,5 @@
 /** Decorative club lighting. No audio, tracking or third-party animation runtime. */
+export {};
 const canvas = document.querySelector<HTMLCanvasElement>('#club-lights')!;
 const ctx = canvas.getContext('2d');
 const toggle = document.querySelector<HTMLButtonElement>('.motion-control')!;
