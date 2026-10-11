@@ -1,0 +1,9 @@
+{
+ "$schema":"../node_modules/wrangler/config-schema.json",
+ "name":"triada-leads",
+ "main":"index.ts",
+ "compatibility_date":"2026-10-01",
+ "vars":{"ALLOWED_ORIGIN":"https://YOUR-ACCOUNT.github.io","PRIVACY_READY":"false"},
+ "ratelimits":[{"name":"LEAD_LIMITER","namespace_id":"1001","simple":{"limit":3,"period":60}}],
+ "observability":{"enabled":false}
+}
