@@ -16,3 +16,10 @@ html{overflow-x:hidden}
 .hero{overflow:clip}
 .edge-haze-left{left:0;width:65px}.edge-haze-right{right:0;width:65px}
 @media(max-width:700px){.edge-haze-left,.edge-haze-right{width:25px}}
+
+/* Fail-closed lead form and persistent privacy access. */
+#lead-form fieldset{border:0;padding:0;margin:0;min-width:0}
+#lead-form fieldset:disabled{opacity:.6}
+#lead-form .submit:disabled{cursor:not-allowed}
+.demo-note a{text-decoration:underline;display:inline-block;margin-top:8px}
+.footer{flex-wrap:wrap}

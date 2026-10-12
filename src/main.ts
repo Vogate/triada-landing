@@ -1,6 +1,5 @@
 import './style.css';
 import './premium.css';
-import './motion';
 import {validateLead} from './lead';
 const menu = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const nav = document.querySelector<HTMLElement>('#navigation')!;
@@ -14,7 +13,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObser
  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 }
 const dialog=document.querySelector<HTMLDialogElement>('#privacy-dialog')!;
-document.querySelector('#privacy-open')!.addEventListener('click',()=>dialog.showModal());
+document.querySelectorAll('[data-privacy-open]').forEach(button=>button.addEventListener('click',()=>dialog.showModal()));
 document.querySelector('#privacy-close')!.addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 const form=document.querySelector<HTMLFormElement>('#lead-form')!;
@@ -41,3 +40,11 @@ form.addEventListener('submit',async e=>{
  }catch(error){status.dataset.state='error';status.textContent=error instanceof Error && error.name==='Error'?error.message:'Не удалось подтвердить отправку. Проверь соединение и попробуй снова.';}
  finally{busy=false;submit.disabled=false;submit.removeAttribute('aria-busy');}
 });
+// Enable native submission only after preventDefault is installed.
+if(ready){
+ form.querySelector<HTMLFieldSetElement>('fieldset')!.disabled=false;
+ submit.type='submit';
+ submit.disabled=false;
+}
+// Decorative failures must never prevent the form handler from being installed.
+void import('./motion').catch(()=>document.body.classList.add('motion-paused'));
