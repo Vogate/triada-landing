@@ -82,4 +82,25 @@ hero.addEventListener('pointermove',e=>{
  hero.style.transform=`rotateY(${x*9}deg) rotateX(${-y*7}deg)`;
 });
 hero.addEventListener('pointerleave',()=>{hero.style.transform='';});
+const courseCards = document.querySelectorAll<HTMLElement>('.lesson');
+const imageProperties = ['--image-rx', '--image-ry', '--image-x', '--image-y', '--light-x', '--light-y'];
+function resetCourseImage(card: HTMLElement) {
+ for (const property of imageProperties) card.style.removeProperty(property);
+}
+courseCards.forEach(card => {
+ card.addEventListener('pointermove', event => {
+  if (paused || reduced.matches || event.pointerType !== 'mouse') return;
+  const box = card.getBoundingClientRect();
+  const x = Math.max(0, Math.min(1, (event.clientX - box.left) / box.width));
+  const y = Math.max(0, Math.min(1, (event.clientY - box.top) / box.height));
+  card.style.setProperty('--image-rx', `${(0.5 - y) * 5}deg`);
+  card.style.setProperty('--image-ry', `${(x - 0.5) * 7}deg`);
+  card.style.setProperty('--image-x', `${(x - 0.5) * 12}px`);
+  card.style.setProperty('--image-y', `${(y - 0.5) * 10}px`);
+  card.style.setProperty('--light-x', `${x * 100}%`);
+  card.style.setProperty('--light-y', `${y * 100}%`);
+ });
+ card.addEventListener('pointerleave', () => resetCourseImage(card));
+});
 resize();sync();
+

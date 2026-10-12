@@ -16,3 +16,41 @@ html{overflow-x:hidden}
 .hero{overflow:clip}
 .edge-haze-left{left:0;width:65px}.edge-haze-right{right:0;width:65px}
 @media(max-width:700px){.edge-haze-left,.edge-haze-right{width:25px}}
+/* On phones, paint club lighting above full-width section backgrounds,
+   confined to the 20px gutters so it never overlaps text or controls. */
+@media (max-width: 700px) {
+  #club-lights {
+    z-index: 5;
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 10px, transparent 20px, transparent calc(100% - 20px), #000 calc(100% - 10px), #000 100%);
+    mask-image: linear-gradient(to right, #000 0, #000 10px, transparent 20px, transparent calc(100% - 20px), #000 calc(100% - 10px), #000 100%);
+  }
+  .edge-haze { z-index: 4; }
+}
+/* Pointer-driven depth and light for the four course illustrations. */
+@media (hover: hover) and (pointer: fine) {
+  .lesson .lesson-visual img {
+    transition: transform .7s cubic-bezier(.2,.7,.25,1), filter .7s;
+    transform-origin: center;
+  }
+  .lesson:hover .lesson-visual img {
+    transform: perspective(900px) rotateX(var(--image-rx, 0deg)) rotateY(var(--image-ry, 0deg)) translate3d(var(--image-x, 0px), var(--image-y, 0px), 0) scale(1.1);
+    filter: saturate(1.1) brightness(1.12);
+  }
+  .lesson-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--light-x, 50%) var(--light-y, 35%), #b6ddff45, #689eff10 28%, transparent 62%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity .5s;
+  }
+  .lesson:hover .lesson-visual::after { opacity: 1; }
+  .motion-paused .lesson:hover .lesson-visual img { transform: none; filter: saturate(.75); }
+  .motion-paused .lesson:hover .lesson-visual::after { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson:hover .lesson-visual img { transform: none; filter: saturate(.75); }
+  .lesson:hover .lesson-visual::after { opacity: 0; }
+}
