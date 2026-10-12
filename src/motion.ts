@@ -1,3 +1,4 @@
+export {};
 /** Decorative club lighting. No audio, tracking or third-party animation runtime. */
 const canvas = document.querySelector<HTMLCanvasElement>('#club-lights')!;
 const ctx = canvas.getContext('2d');
@@ -103,4 +104,5 @@ courseCards.forEach(card => {
  card.addEventListener('pointerleave', () => resetCourseImage(card));
 });
 resize();sync();
+
 
