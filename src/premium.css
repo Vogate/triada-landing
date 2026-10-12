@@ -123,3 +123,17 @@ html{overflow-x:hidden}
 @keyframes cta-disco-reflections{from{transform:translate(-13%,-7%) rotate(-5deg);opacity:.45}to{transform:translate(16%,10%) rotate(8deg);opacity:.8}}
 @keyframes cta-glint-sweep{0%,18%{left:-65%;opacity:0}25%{opacity:.65}55%{left:125%;opacity:.55}65%,100%{left:125%;opacity:0}}
 @media(prefers-reduced-motion:reduce){.hero .button::before,.hero .button::after{display:none}}
+/* Sequential introductions to the three TRIADA founders. */
+.mentor-progress{font-size:13px;color:#b8c9e5;line-height:1.8;margin:-15px 0 30px;max-width:650px}
+.mentor-cover{width:100%;min-height:390px;border:1px solid #8eaff34d;border-radius:8px;background:radial-gradient(ellipse at 50% 45%,#244b823d,transparent 65%),linear-gradient(140deg,#0a1323,#131d30);color:#cfe1ff;padding:25px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s}
+.mentor-cover::before{content:'';position:absolute;width:250px;height:250px;top:55px;border:1px solid #8eb7ff26;border-radius:50%;pointer-events:none}
+.mystery-index{align-self:flex-start;font-size:10px;letter-spacing:.17em;color:#a5bbde}
+.mystery-mark{font-family:'Unbounded Variable',sans-serif;font-size:130px;font-weight:400;line-height:1;color:#a7c8ff;text-shadow:0 0 35px #75aaff55;transition:transform .5s}
+.mystery-caption{font-size:12px;line-height:1.7;max-width:220px;text-align:center}.mystery-caption>span{margin-left:8px}
+.mentor-cover:hover:not(:disabled){border-color:#c3deff;box-shadow:0 0 45px #3673da26}.mentor-cover:hover:not(:disabled) .mystery-mark{transform:scale(1.06) rotate(-4deg)}
+.mentor-cover:disabled{cursor:not-allowed;opacity:.5}.mentor-cover[hidden],.mentor-content[hidden]{display:none!important}
+.mentor-open .mentor-content{animation:mentor-unveil .65s ease-out both}
+.mentor-read{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-top:24px;padding:16px 18px;border:1px solid #9cbff06b;border-radius:4px;background:#223c6433;color:#c6ddff;font-size:12px;line-height:1.6;text-align:left}.mentor-read:hover:not(:disabled){background:#31558666}.mentor-read:disabled{color:#9fafc8;cursor:default;background:transparent;border-color:#536680}
+@keyframes mentor-unveil{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:700px){.mentor-cover{min-height:340px}.mystery-mark{font-size:115px}.mentor-progress{font-size:12px;margin-top:-10px}.mentor-read{min-height:54px}}
+@media(prefers-reduced-motion:reduce){.mentor-cover:hover:not(:disabled) .mystery-mark{transform:none}}

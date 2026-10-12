@@ -1,3 +1,4 @@
+import './mentors';
 import './style.css';
 import './premium.css';
 import {validateLead} from './lead';
