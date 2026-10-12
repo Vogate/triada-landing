@@ -137,3 +137,8 @@ html{overflow-x:hidden}
 @keyframes mentor-unveil{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:700px){.mentor-cover{min-height:340px}.mystery-mark{font-size:115px}.mentor-progress{font-size:12px;margin-top:-10px}.mentor-read{min-height:54px}}
 @media(prefers-reduced-motion:reduce){.mentor-cover:hover:not(:disabled) .mystery-mark{transform:none}}
+/* Use the original metallic TRIADA lettering for header and footer branding. */
+.brand{display:inline-flex;align-items:center;line-height:0;flex-shrink:0}
+.brand-wordmark{display:block;width:210px;height:auto;mix-blend-mode:screen}
+.footer .brand-wordmark{width:185px}
+@media(max-width:700px){.header .brand-wordmark{width:165px}.footer .brand-wordmark{width:175px}}
