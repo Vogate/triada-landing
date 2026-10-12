@@ -94,9 +94,17 @@ courseCards.forEach(card => {
  trigger.className = 'lesson-trigger';
  trigger.setAttribute('aria-label', `Анимировать изображение: ${card.querySelector('h3')?.textContent || 'обучение'}`);
  card.append(trigger);
+ const hasJog = !!card.querySelector('.jog-motion');
+ if (hasJog) { trigger.setAttribute('aria-label', 'Запустить вращение джога'); trigger.setAttribute('aria-pressed', 'false'); }
  let tapTimer: ReturnType<typeof setTimeout> | undefined;
  trigger.addEventListener('click', () => {
   if (paused || document.hidden) return;
+  if (hasJog) {
+   const spinning = card.classList.toggle('jog-spinning');
+   trigger.setAttribute('aria-pressed', String(spinning));
+   trigger.setAttribute('aria-label', spinning ? 'Остановить вращение джога' : 'Запустить вращение джога');
+   return;
+  }
   clearTimeout(tapTimer);
   card.classList.remove('is-tapped');
   // Restart the short effect even when the same image is tapped again.
