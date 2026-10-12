@@ -122,3 +122,11 @@ resize();sync();
 
 
 
+// Pause the graduation scene while it is outside the viewport.
+const stage = document.querySelector<HTMLElement>('.finale-art');
+if(stage && 'IntersectionObserver' in window){
+ const stageObserver = new IntersectionObserver(entries => {
+  stage.classList.toggle('scene-idle', !entries[0].isIntersecting);
+ }, {threshold:0});
+ stageObserver.observe(stage);
+}
