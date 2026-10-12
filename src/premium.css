@@ -101,3 +101,17 @@ html{overflow-x:hidden}
 .vinyl-motion{mix-blend-mode:screen}
 .vinyl-texture{width:1900px;height:1900px;border-radius:50%;transform-origin:50% 50%;background:repeating-radial-gradient(circle at center,transparent 0 7px,#a2caff22 8px,transparent 9px 13px),conic-gradient(from 20deg,transparent 0deg,#c8e5ff55 35deg,transparent 68deg,transparent 130deg,#85baff44 175deg,transparent 215deg,transparent 275deg,#d6ebff66 312deg,transparent 348deg);animation-duration:4s}
 .record-surface{opacity:1!important;mix-blend-mode:normal;filter:saturate(.75);object-fit:cover}
+/* Fourth card: independent crowd, mirror ball and stage light layers. */
+.club-motion{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .4s;filter:saturate(.75)}
+.club-running .club-motion{opacity:1}
+.club-beam{transform-origin:0 0;animation:club-beam-sweep 8s ease-in-out infinite alternate;animation-play-state:paused;mix-blend-mode:screen}
+.beam-b{animation-duration:11s;animation-delay:-4s;animation-direction:alternate-reverse}
+.club-ball-spin{transform-origin:0 0;animation:club-ball-rotate 7s linear infinite;animation-play-state:paused}
+.crowd-dancing{transform-origin:600px 590px;animation:club-crowd-dance 2.6s ease-in-out infinite;animation-play-state:paused}
+.club-running .club-beam,.club-running .club-ball-spin,.club-running .crowd-dancing{animation-play-state:running}
+.club-idle .club-motion *,.motion-paused .club-motion *{animation-play-state:paused!important}
+.lesson:has(.club-motion):hover .lesson-visual img{transform:none;filter:saturate(.75)}
+@keyframes club-beam-sweep{from{transform:rotate(-24deg)}to{transform:rotate(23deg)}}
+@keyframes club-ball-rotate{to{transform:rotate(360deg)}}
+@keyframes club-crowd-dance{0%,100%{transform:translate(0,0) rotate(-.45deg)}25%{transform:translate(3px,-3px) rotate(.25deg)}50%{transform:translate(0,-1px) rotate(.45deg)}75%{transform:translate(-3px,-3px) rotate(-.25deg)}}
+@media(prefers-reduced-motion:reduce){.club-running .club-motion{opacity:.4}.club-motion *{animation:none!important}}

@@ -97,11 +97,19 @@ courseCards.forEach(card => {
  card.append(trigger);
  const rotatingLayer = card.querySelector<SVGElement>('.jog-motion');
  const hasJog = !!rotatingLayer;
+ const hasClub = !!card.querySelector('.club-motion');
  const rotatingName = rotatingLayer?.dataset.rotatingName || 'джога';
  if (hasJog) { trigger.setAttribute('aria-label', `Запустить вращение ${rotatingName}`); trigger.setAttribute('aria-pressed', 'false'); }
+ if(hasClub){trigger.setAttribute('aria-label','Запустить движение клуба');trigger.setAttribute('aria-pressed','false');}
  let tapTimer: ReturnType<typeof setTimeout> | undefined;
  trigger.addEventListener('click', () => {
   if (paused || document.hidden) return;
+  if(hasClub){
+   const playing=card.classList.toggle('club-running');
+   trigger.setAttribute('aria-pressed',String(playing));
+   trigger.setAttribute('aria-label',playing?'Остановить движение клуба':'Запустить движение клуба');
+   return;
+  }
   if (hasJog) {
    const spinning = card.classList.toggle('jog-spinning');
    card.dispatchEvent(new CustomEvent('record-spin', {detail: spinning}));
@@ -142,3 +150,6 @@ if(stage && 'IntersectionObserver' in window){
  }, {threshold:0});
  stageObserver.observe(stage);
 }
+
+const clubCard=document.querySelector<HTMLElement>('.lesson:has(.club-motion)');
+if(clubCard && 'IntersectionObserver' in window)new IntersectionObserver(entries=>clubCard.classList.toggle('club-idle',!entries[0].isIntersecting)).observe(clubCard);
