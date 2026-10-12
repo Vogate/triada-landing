@@ -89,6 +89,21 @@ function resetCourseImage(card: HTMLElement) {
  for (const property of imageProperties) card.style.removeProperty(property);
 }
 courseCards.forEach(card => {
+ const trigger = document.createElement('button');
+ trigger.type = 'button';
+ trigger.className = 'lesson-trigger';
+ trigger.setAttribute('aria-label', `Анимировать изображение: ${card.querySelector('h3')?.textContent || 'обучение'}`);
+ card.append(trigger);
+ let tapTimer: ReturnType<typeof setTimeout> | undefined;
+ trigger.addEventListener('click', () => {
+  if (paused || document.hidden) return;
+  clearTimeout(tapTimer);
+  card.classList.remove('is-tapped');
+  // Restart the short effect even when the same image is tapped again.
+  void card.offsetWidth;
+  card.classList.add('is-tapped');
+  tapTimer = setTimeout(() => card.classList.remove('is-tapped'), 1450);
+ });
  card.addEventListener('pointermove', event => {
   if (paused || reduced.matches || event.pointerType !== 'mouse') return;
   const box = card.getBoundingClientRect();
@@ -104,5 +119,6 @@ courseCards.forEach(card => {
  card.addEventListener('pointerleave', () => resetCourseImage(card));
 });
 resize();sync();
+
 
 

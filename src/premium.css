@@ -60,3 +60,12 @@ html{overflow-x:hidden}
 #lead-form .submit:disabled{cursor:not-allowed}
 .demo-note a{text-decoration:underline;display:inline-block;margin-top:8px}
 .footer{flex-wrap:wrap}
+/* Tap feedback works on touch screens as well as with mouse and keyboard. */
+.lesson-trigger{position:absolute;inset:0;z-index:3;border:0;padding:0;background:transparent;color:inherit;cursor:pointer;border-radius:inherit;touch-action:manipulation}
+.lesson-trigger:focus-visible{outline:2px solid #bad8ff;outline-offset:-5px}
+.lesson-visual::before{content:'';position:absolute;inset:-20% -70%;pointer-events:none;background:linear-gradient(110deg,transparent 40%,#bbdfff65 49%,transparent 58%);opacity:0;z-index:1;mix-blend-mode:screen;transform:translateX(-35%)}
+.lesson.is-tapped .lesson-visual img{animation:course-tap-zoom 1.4s cubic-bezier(.22,.65,.3,1) both}
+.lesson.is-tapped .lesson-visual::before{animation:course-tap-light 1.4s ease-out both}
+@keyframes course-tap-zoom{0%,100%{transform:scale(1);filter:saturate(.75) brightness(1)}40%{transform:scale(1.13) rotate(.7deg);filter:saturate(1.2) brightness(1.2)}}
+@keyframes course-tap-light{0%{opacity:0;transform:translateX(-35%)}25%{opacity:.85}70%{opacity:.5}100%{opacity:0;transform:translateX(35%)}}
+@media(prefers-reduced-motion:reduce){.lesson.is-tapped .lesson-visual img{filter:brightness(1.15)}.lesson.is-tapped .lesson-visual::before{display:none}}
