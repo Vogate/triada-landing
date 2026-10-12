@@ -100,3 +100,4 @@ html{overflow-x:hidden}
 /* A broad rotating record texture makes movement visible on small screens. */
 .vinyl-motion{mix-blend-mode:screen}
 .vinyl-texture{width:1900px;height:1900px;border-radius:50%;transform-origin:50% 50%;background:repeating-radial-gradient(circle at center,transparent 0 7px,#a2caff22 8px,transparent 9px 13px),conic-gradient(from 20deg,transparent 0deg,#c8e5ff55 35deg,transparent 68deg,transparent 130deg,#85baff44 175deg,transparent 215deg,transparent 275deg,#d6ebff66 312deg,transparent 348deg);animation-duration:4s}
+.record-surface{opacity:1!important;mix-blend-mode:normal;filter:saturate(.75);object-fit:cover}

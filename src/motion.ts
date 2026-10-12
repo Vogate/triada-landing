@@ -1,3 +1,4 @@
+import './vinyl';
 export {};
 /** Decorative club lighting. No audio, tracking or third-party animation runtime. */
 const canvas = document.querySelector<HTMLCanvasElement>('#club-lights')!;
@@ -103,6 +104,7 @@ courseCards.forEach(card => {
   if (paused || document.hidden) return;
   if (hasJog) {
    const spinning = card.classList.toggle('jog-spinning');
+   card.dispatchEvent(new CustomEvent('record-spin', {detail: spinning}));
    trigger.setAttribute('aria-pressed', String(spinning));
    trigger.setAttribute('aria-label', spinning ? `Остановить вращение ${rotatingName}` : `Запустить вращение ${rotatingName}`);
    return;
