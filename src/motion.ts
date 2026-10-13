@@ -1,3 +1,4 @@
+import {setupEquipmentAudio} from './equipment-audio';
 import './vinyl';
 export {};
 /** Decorative club lighting. No audio, tracking or third-party animation runtime. */
@@ -101,9 +102,11 @@ courseCards.forEach(card => {
  const rotatingName = rotatingLayer?.dataset.rotatingName || 'джога';
  if (hasJog) { trigger.setAttribute('aria-label', `Запустить вращение ${rotatingName}`); trigger.setAttribute('aria-pressed', 'false'); }
  if(hasClub){trigger.setAttribute('aria-label','Запустить движение клуба');trigger.setAttribute('aria-pressed','false');}
+ const audioController=card.querySelector('img[src$="/equipment.webp"]')?setupEquipmentAudio(card,trigger):null;
  let tapTimer: ReturnType<typeof setTimeout> | undefined;
  trigger.addEventListener('click', () => {
   if (paused || document.hidden) return;
+  if(audioController){audioController();return;}
   if(hasClub){
    const playing=card.classList.toggle('club-running');
    trigger.setAttribute('aria-pressed',String(playing));
@@ -153,3 +156,4 @@ if(stage && 'IntersectionObserver' in window){
 
 const clubCard=document.querySelector<HTMLElement>('.lesson:has(.club-motion)');
 if(clubCard && 'IntersectionObserver' in window)new IntersectionObserver(entries=>clubCard.classList.toggle('club-idle',!entries[0].isIntersecting)).observe(clubCard);
+
